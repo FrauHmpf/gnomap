@@ -1,0 +1,48 @@
+<html>
+  <head>
+<style>
+  #map {
+      width: 100%;
+      height: 480px;
+      background-color: grey;
+  }
+  </style>
+    <title>Gnomap</title>
+  </head>
+  <body>
+    Gartenzwerge
+  <div id="map"></div>
+<form>
+Select an Emoji:
+<select id="icon_to_use">
+<option value="gnomap.png">Gnome</option>
+<option value="xmas.png">Santa</option>
+</select>
+</form>
+<script>
+    var map;
+    function initMap() {
+
+            map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: {lat: 52.449418, lng: 13.321068}
+});
+function place_marker(location){
+	var emoji = document.getElementById("icon_to_use").value;
+	var marker = new google.maps.Marker({
+  	position: location,
+  	map: map,
+	icon: emoji
+});
+console.log(location.lat() + " " + location.lng() + " " + emoji);
+}
+	map.addListener('click', function(e) {
+	var location = e.latLng;
+  	place_marker(location);
+});
+}
+</script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRddEtNZT4mCvkM4aI2znD7ShID1_-Rwc&callback=initMap">
+  </script></body>
+  </html> 
